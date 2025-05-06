@@ -12,4 +12,3 @@ const comparePassword = async (password, hash) => {
 }
 
 export { hashPassword, comparePassword };
-export default { hashPassword, comparePassword };

@@ -15,7 +15,7 @@ adminRouter.delete("/users/:id", async (req, res) => {
     if (result.deletedCount === 0) {
         return res.status(404).json({ message: "User not found!" });
     }
-    res.status(200).json({ message: "User deleted successfully!" });
+    res.status(200).json({ message: "Admin deleted user successfully!" });
 });
 
 adminRouter.get("/pets", async (req, res) => {
@@ -29,7 +29,7 @@ adminRouter.delete("/pets/:id", async (req, res) => {
     if (result.deletedCount === 0) {
         return res.status(404).json({ message: "Pet not found!" });
     }
-    res.status(200).json({ message: "Pet deleted successfully!" });
+    res.status(200).json({ message: "Admin deleted pet successfully!" });
 });
 
 export default adminRouter;
