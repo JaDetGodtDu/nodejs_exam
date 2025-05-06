@@ -1,4 +1,4 @@
-## **Pets have the following stats: **
+## **Pets have the following stats:**
 
 - type (random number between 1 and 10, which will determine their visual look in the frontend)
 - hunger (max 100)
