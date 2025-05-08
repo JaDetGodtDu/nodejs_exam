@@ -40,6 +40,9 @@ userRouter.post('/login', async (req, res) => {
 });
 
 userRouter.post('/logout', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(400).json({ message: 'No user logged in!' });
+    }
     req.session.destroy();
     return res.status(200).json({ message: 'Logged out successfully!' });
 });
