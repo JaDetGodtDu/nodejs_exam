@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import dbConnection from '../database/dbConnection.js';
+import {ObjectId} from 'mongodb';
 import {hashPassword, comparePassword} from '../util/hasher.js';
 
 const userRouter = Router();
@@ -10,6 +11,8 @@ userRouter.get('/signup', async (req, res) => {
     const existingUser = await users.findOne({username});
     if (existingUser) {
         return res.status(400).json({message: 'Username taken!'});
+    } else if (req.session.userId) {
+        return res.status(400).json({ message: 'User already logged in!' });
     }
 
     const hashedPassword = await hashPassword(password);
@@ -20,8 +23,7 @@ userRouter.get('/signup', async (req, res) => {
         email,
         isAdmin: false,
     });
-
-    req.session.userId = newUser.insertedId;
+    // req.session.userId = newUser.insertedId; 
     
     return res.status(201).json({message: 'User created successfully!'});
 
@@ -34,7 +36,9 @@ userRouter.post('/login', async (req, res) => {
     if (!user || !(await comparePassword(password, user.password))) {
         return res.status(401).json({ message: 'Invalid credentials!' });
     }
-
+    if (req.session.userId) {
+        return res.status(400).json({ message: 'User already logged in!' });
+    }
     req.session.userId = user._id;
     return res.status(200).json({ message: 'Login successful!' });
 });
@@ -47,7 +51,21 @@ userRouter.post('/logout', (req, res) => {
     return res.status(200).json({ message: 'Logged out successfully!' });
 });
 
-userRouter.get('/profile', (req, res) => {
+userRouter.get('/profile', async (req, res) => {
+    const userObjectId = new ObjectId(req.session.userId);
+    const user = await users.findOne({ _id: userObjectId});
+
+    if (!req.session.userId) {
+    return res.status(401).json({ message: 'No user logged in!' });
+    } else if (!user) {
+        return res.status(404).json({ message: 'User not found!' });
+    }
+
+    return res.status(200).json({
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+    });
 
 });
 

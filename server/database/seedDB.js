@@ -1,14 +1,7 @@
-//import { MongoClient } from "mongodb";
 import { hashPassword } from "../util/hasher.js";
 import dbConnection from "./dbConnection.js";
 
-// const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/pixelPalsDB";
-// const client = new MongoClient(uri);
-
 async function seedDB() {
-    // await client.connect();
-    // const db = client.db("pixelPalsDB");
-
     const { db } = dbConnection;
 
     const seededUsers = [{
