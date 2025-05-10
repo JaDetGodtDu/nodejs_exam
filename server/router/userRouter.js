@@ -23,9 +23,12 @@ userRouter.get('/signup', async (req, res) => {
         email,
         isAdmin: false,
     });
-    // req.session.userId = newUser.insertedId; 
-    
-    return res.status(201).json({message: 'User created successfully!'});
+
+    if (!newUser) {
+        return res.status(500).json({ message: 'Error creating user!' });
+    }
+
+    return res.status(201).json({ message: 'User created successfully!' });
 
 });
 
@@ -69,7 +72,19 @@ userRouter.get('/profile', async (req, res) => {
 
 });
 
-userRouter.delete('/delete', (req, res) => {
+userRouter.delete('/delete', async (req, res) => {
+    const userObjectId = new ObjectId(req.session.userId);
+    const user = await users.findOne({ _id: userObjectId});
+
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'No user logged in!' });
+    } else if (!user) {
+        return res.status(404).json({ message: 'User not found!' });
+    }
+
+    await users.deleteOne({ _id: userObjectId });
+    req.session.destroy();
+    return res.status(200).json({ message: 'You deleted your user succesfully!', username: user.username });
     
 });
 
