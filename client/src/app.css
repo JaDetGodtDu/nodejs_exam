@@ -77,35 +77,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-/* MY OWN CSS STYLES FOR CUSTOM USE */
-#frontpage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    
-    background-color: #242424;
-    border: #1a1a1a solid 1px;
-    border-radius: 10px;
-
-    width: 50vw;
-    height: 75vh;
-}
-#navbar{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
-    border-radius: 10px;
-    
-    background-color: #242424;
-    color: white;
-    padding: 10px;
-    margin: 0% 0% 2.5% 0%
-}
-#navbar button{
-    padding: 0.05em 0.5em;
-}

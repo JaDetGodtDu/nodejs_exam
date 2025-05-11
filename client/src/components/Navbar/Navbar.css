@@ -1,11 +1,25 @@
-nav{
-    background-color: #333;
+#navbar a img {
+    height: 34.55px;
+    width: 34.55px;
+}
+
+#navbar{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 10px;
+    
+    background-color: #242424;
     color: white;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin: 0% 0% 2.5% 0%;
+
+    z-index: 1;
+
 }
-button{
+#navbar button{
     padding: 0.05em 0.5em;
 }
