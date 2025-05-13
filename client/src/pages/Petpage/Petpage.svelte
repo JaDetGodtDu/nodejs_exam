@@ -35,13 +35,11 @@
 <div id='petpage' class="page">
     {#if pet}
     <div id='actions-container'>
-
         <button class='pet-action-btn' on:click={() => handleAction('feed')}>Feed</button>
         <button class='pet-action-btn' on:click={() => handleAction('pet')}>Pet</button>
         <button class='pet-action-btn' on:click={() => handleAction('play')}>Play</button>
         <button class='pet-action-btn' on:click={() => handleAction('heal')}>Heal</button>
-        <button class='pet-action-btn' on:click={() => handleAction('rest')}>Rest</button>
-    
+        <button class='pet-action-btn' on:click={() => handleAction('rest')}>Rest</button>  
     </div>
     <div id='pet-container'>
         <div class="pet-details">
@@ -55,19 +53,22 @@
                 <div class='stat'>
                     <span>Health:</span>
                     <progress max="100" value={pet.health}></progress>
+                    <span class='stat-span'>{pet.health} / 100</span>
                 </div>
                 <div class='stat'>
                     <span>Happiness:</span>
                     <progress max="100" value={pet.happiness}></progress>
+                    <span class='stat-span'>{pet.happiness} / 100</span>
                 </div>
                 <div class='stat'>
                     <span>Hunger:</span>
                     <progress max="100" value={pet.hunger}></progress>
+                    <span class='stat-span'>{pet.hunger} / 100</span>
                 </div>
                 <div class='stat'>
                     <span>Energy:</span>
                     <progress max="100" value={pet.energy}></progress>
-                    <span>{pet.energy} / 100</span>
+                    <span class='stat-span'>{pet.energy} / 100</span>
                 </div>
 
             </div>
