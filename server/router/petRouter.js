@@ -5,15 +5,25 @@ import { ObjectId } from "mongodb";
 const petRouter = Router();
 const { pets, users } = dbConnection;
 
-petRouter.get("/:id", async (req, res) => {
-    const { id } = req.params;
-    const petObjectId = new ObjectId(id);
-    const pet = await pets.findOne({ _id: petObjectId });
+// petRouter.get("/:id", async (req, res) => {
+//     const { id } = req.params;
+//     const petObjectId = new ObjectId(id);
+//     const pet = await pets.findOne({ _id: petObjectId });
 
-    if (!pet) {
-        return res.status(404).json({ message: "Pet not found!" });
-    }
-    return res.status(200).json({message: "Pet found!", pet });
+//     if (!pet) {
+//         return res.status(404).json({ message: "Pet not found!" });
+//     }
+//     return res.status(200).json({message: "Pet found!", pet });
+
+// });
+petRouter.get("/", async (req, res) => {
+    const { ownerId } = req.query;
+    
+    const ownerObjectId = new ObjectId(ownerId);
+
+    const pet = await pets.findOne({ ownerId: ownerObjectId });
+
+    return res.status(200).json({ message: "Pet found!", pet });
 
 });
 

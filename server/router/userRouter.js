@@ -43,7 +43,12 @@ userRouter.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'User already logged in!' });
     }
     req.session.userId = user._id;
-    return res.status(200).json({ message: 'Login successful!' });
+    return res.status(200).json({ 
+        message: 'Login successful!', 
+        userId: user._id, 
+        isAdmin: user.isAdmin, 
+        username: user.username, 
+        email: user.email });
 });
 
 userRouter.post('/logout', (req, res) => {

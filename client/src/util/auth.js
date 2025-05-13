@@ -22,6 +22,7 @@ export async function login(username, password) {
             username: data.username,
             email: data.email,
         });
+        
         navigate("/petpage");
         return {success: true, message: `Login successful! Welcome ${username}!` };
     } else {

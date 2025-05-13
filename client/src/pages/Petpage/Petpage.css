@@ -1,0 +1,67 @@
+#petpage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    background-color: #242424;
+    border: #1a1a1a solid 1px;
+    border-radius: 10px;
+}
+#actions-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+    position: absolute;
+    left: 20px; /* Position the action buttons on the left */
+    top: 50%;
+    transform: translateY(-50%); /* Center the buttons vertically */
+}
+#pet-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid #0ca85a;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+
+#stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pet-action-btn {
+    width: 50%;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #0ca85a;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.pet-action-btn:hover {
+    background-color: #0d9651;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+}
