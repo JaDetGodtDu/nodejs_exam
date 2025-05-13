@@ -6,7 +6,7 @@ import {hashPassword, comparePassword} from '../util/hasher.js';
 const userRouter = Router();
 const { users } = dbConnection;
 
-userRouter.get('/signup', async (req, res) => {
+userRouter.post('/signup', async (req, res) => {
     const {username, password, email} = req.body;
     const existingUser = await users.findOne({username});
     if (existingUser) {
