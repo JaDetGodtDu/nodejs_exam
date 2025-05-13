@@ -3,7 +3,7 @@
     import { Link } from "svelte-routing";
     import { onMount } from 'svelte';
     import { session } from '../../stores/sessionStore';
-    import { logout } from '../../util/logout.js';
+    import { logout } from '../../util/auth.js';
 
     let isLoggedIn = false;
     let isAdmin = false;
@@ -31,6 +31,8 @@
         {/if}
     <button on:click={logout}>Logout</button>
     {/if}
-    <Link to="/signup">Signup</Link>   
-    <Link to="/login">Login</Link>
+    {#if !isLoggedIn}     
+        <Link to="/signup">Signup</Link>   
+        <Link to="/login">Login</Link>
+    {/if}
 </nav>

@@ -1,3 +1,4 @@
+import { navigate } from "svelte-routing";
 import { session } from "../stores/sessionStore";
 
 let url = "http://localhost:8080/users";
@@ -20,7 +21,9 @@ export async function login(username, password) {
             isAdmin: data.isAdmin,
             username: data.username,
             email: data.email,
-        });return {success: true, message: `Login successful! Welcome ${username}!` };
+        });
+        navigate("/petpage");
+        return {success: true, message: `Login successful! Welcome ${username}!` };
     } else {
         const data = await response.json();
         return {success: false, message: data.error || "Login failed!" };
@@ -41,6 +44,7 @@ export async function logout() {
             username: null,
             email: null,
         });
+        navigate("/");
         return {success: true, message: "Logout successful!" };
     } else {
         const data = await response.json();
