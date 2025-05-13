@@ -11,4 +11,7 @@
 
     width: 50vw;
     height: 75vh;
+
+    overflow: hidden;
+    padding: 20px;
 }
