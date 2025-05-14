@@ -75,7 +75,7 @@
 }
 .stat-span {
     position: absolute;
-    right: -40%;
+    right: -30%;
     transform: translateX(0);
 }
 progress {
