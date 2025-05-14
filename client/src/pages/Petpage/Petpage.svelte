@@ -1,13 +1,16 @@
 <script>
     import '../page.css';
     import './Petpage.css';
+    import { onMount, onDestroy } from 'svelte';
+    import { session } from '../../stores/sessionStore';
     import { fetchPet } from '../../util/fetchPet';
     import { performPetAction } from '../../util/performPetAction';
-    import { onMount } from 'svelte';
-    import { session } from '../../stores/sessionStore';
+    import { getPetAge } from '../../util/middleware/getPetAge';
 
     let pet = null;
     let ownerId = null;
+    let petAge = null;
+    let ageCounter;
 
     session.subscribe((value) => {
         ownerId = value.userId;
@@ -15,18 +18,31 @@
 
     onMount(async () => {
        if (ownerId) {
-            pet = await fetchPet(ownerId);
-            console.log(pet);
+            pet = await fetchPet(ownerId);           
+            petAge = getPetAge(pet.createdAt, pet.lastUpdated);
+
+            ageCounter = setInterval(() => {
+                petAge = getPetAge(pet.createdAt, new Date().toISOString());
+            }, 1000);
         } else {
             console.error("Owner ID is not available");
+        }
+    });
+    onDestroy(() => {
+        if (ageCounter) {
+            clearInterval(ageCounter);
         }
     });
 
     async function handleAction(action) {
         try {
             const data = await performPetAction(pet._id, action);
-            pet = { ...pet, ...data.pet }; // Update the pet stats with the response
+
+            pet = { ...pet, ...data.pet };
             console.log(`Action ${action} performed successfully!`, data);
+            
+            // petAge = getPetAge(pet.createdAt, pet.lastUpdated);
+            // console.log(petAge.lastUpdatedDate);
         } catch (err) {
             console.error(`Error performing action ${action}:`, err.message);
         }
@@ -45,6 +61,7 @@
         <div class="pet-details">
 
             <h2>{pet.name}</h2>
+            <p><b>Lifespan:</b> {petAge?.days ?? 0} days, {petAge?.hours ?? 0} hours and {petAge?.minutes ?? 0} minutes</p>
             <div class="pet-image">
                 <img src='/kitkat.png' alt={pet.name} />
             </div>
