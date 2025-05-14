@@ -67,17 +67,16 @@
     transform: translateX(200%);
 } */
 .stat {
-    position: relative; /* Make the .stat container the positioning context */
+    position: relative; 
     width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .stat-span {
-    position: absolute; /* Position relative to the .stat container */
-    right: -50%; /* Align it to the right edge of the .stat container */
-    transform: translateX(0); /* Remove unnecessary translation */
+    position: absolute;
+    right: -50%;
+    transform: translateX(0);
 }
 progress {
     width: 100%;
