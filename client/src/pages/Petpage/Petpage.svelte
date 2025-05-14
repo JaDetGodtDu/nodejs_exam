@@ -6,6 +6,7 @@
     import { fetchPet } from '../../util/fetchPet';
     import { performPetAction } from '../../util/performPetAction';
     import { getPetAge } from '../../util/middleware/getPetAge';
+    import { getPetImg } from '../../util/middleware/getPetImg';
 
     let pet = null;
     let ownerId = null;
@@ -63,7 +64,7 @@
             <h2>{pet.name}</h2>
             <p><b>Lifespan:</b> {petAge?.days ?? 0} days, {petAge?.hours ?? 0} hours and {petAge?.minutes ?? 0} minutes</p>
             <div class="pet-image">
-                <img src='/kitkat.png' alt={pet.name} />
+                <img src={getPetImg(pet.type)} alt={pet.name} />
             </div>
             <div id='stats'>
 
