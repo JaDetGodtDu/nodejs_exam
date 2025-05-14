@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import sessionHandler from './util/sessionHandler.js';
+import { petStatDecay } from './util/petStatDecay.js';
+
 import adminRouter from './router/adminRouter.js';
 import userRouter from './router/userRouter.js';
 import petRouter from './router/petRouter.js';
@@ -19,6 +21,8 @@ app.use('/admin', adminRouter)
 app.use('/users', userRouter)
 app.use('/pets', petRouter)
 app.use( sessionRouter )
+
+petStatDecay();
 
 const PORT =  process.env.PORT || 8080;
 app.listen(PORT, () => {
