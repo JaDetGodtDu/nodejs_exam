@@ -6,6 +6,24 @@ import {hashPassword, comparePassword} from '../util/hasher.js';
 const userRouter = Router();
 const { users } = dbConnection;
 
+// WILL MAYBE NEED THIS LATER, WE'LL SEE
+// userRouter.get('/profile', async (req, res) => {
+//     const userObjectId = new ObjectId(req.session.userId);
+//     const user = await users.findOne({ _id: userObjectId});
+
+//     if (!req.session.userId) {
+//     return res.status(401).json({ message: 'No user logged in!' });
+//     } else if (!user) {
+//         return res.status(404).json({ message: 'User not found!' });
+//     }
+
+//     return res.status(200).json({
+//         username: user.username,
+//         email: user.email,
+//         isAdmin: user.isAdmin,
+//     });
+
+// });
 userRouter.post('/signup', async (req, res) => {
     const {username, password, email} = req.body;
     const existingUser = await users.findOne({username});
@@ -59,24 +77,48 @@ userRouter.post('/logout', (req, res) => {
     return res.status(200).json({ message: 'Logged out successfully!' });
 });
 
-userRouter.get('/profile', async (req, res) => {
+userRouter.put('/update', async (req, res) => {
+    const { username, email} = req.body;
     const userObjectId = new ObjectId(req.session.userId);
     const user = await users.findOne({ _id: userObjectId});
 
-    if (!req.session.userId) {
-    return res.status(401).json({ message: 'No user logged in!' });
-    } else if (!user) {
+    if (!user){
         return res.status(404).json({ message: 'User not found!' });
     }
 
-    return res.status(200).json({
-        username: user.username,
-        email: user.email,
-        isAdmin: user.isAdmin,
-    });
+    const updatedUser = await users.updateOne(
+        { _id: userObjectId },
+        { $set: { username, email } }
+    );
 
-});
+    if (!updatedUser) {
+        return res.status(500).json({ message: 'Error updating user!' });
+    }
 
+    return res.status(200).json({ message: 'User updated successfully!', username, email });
+})
+userRouter.put('/updatePassword', async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const userObjectId = new ObjectId(req.session.userId);
+    const user = await users.findOne({ _id: userObjectId});
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found!' });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+
+    const updatedUser = await users.updateOne(
+        { _id: userObjectId },
+        { $set: { password: hashedPassword } }
+    );
+
+    if (!updatedUser) {
+        return res.status(500).json({ message: 'Error updating password!' });
+    }
+
+    return res.status(200).json({ message: 'Password updated successfully!' });
+})
 userRouter.delete('/delete', async (req, res) => {
     const userObjectId = new ObjectId(req.session.userId);
     const user = await users.findOne({ _id: userObjectId});
