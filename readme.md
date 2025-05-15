@@ -1,8 +1,18 @@
 # ** TODO **
 - Set up auth/protected routing on frontend routes (DONE)
 
-- Make a battle system using sockets.broadcast !
+- Set up update user info in frontend
+- Set up change password in frontend
 
-- Set up /signup emailing service
+- Set up /signup emailing service in backend
+- Set up /signup creation of pet logic - In the frontend? Automatically when a user is created?
+
+- Make death logic for pets
+
+- Add more stat logic (Can't play when energy=0 etc.)
 
 - Set up admin system in frontend
+
+- Set up rate limiting. Helmet()?
+
+- Make a battle system using sockets.broadcast !
