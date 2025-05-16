@@ -46,7 +46,8 @@ userRouter.post('/signup', async (req, res) => {
     const welcomeEmail = await sendEmail(
         email, 
         `Welcome to Bingoloids!`, 
-        `Hello ${username}, welcome to Bingoloids - your pet life simulator!`
+        `Hello ${username}.\n
+        Welcome to Bingoloids - your pet life simulator!`
     );
 
     if (!newUser) {
@@ -55,7 +56,7 @@ userRouter.post('/signup', async (req, res) => {
         return res.status(500).json({ message: 'Error sending welcome email!' });
     }
 
-    return res.status(201).json({ message: 'User created successfully!' });
+    return res.status(201).json({ message: 'User created successfully!', previewUrl: welcomeEmail.previewUrl });
 
 });
 

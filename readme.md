@@ -1,6 +1,8 @@
 # ** TODO **
 - Set up auth/protected routing on frontend routes (DONE)
 
+- Set up toaster messages !
+
 - Set up update user info in frontend
 - Set up change password in frontend
 
@@ -13,6 +15,8 @@
 
 - Set up admin system in frontend
 
-- Set up rate limiting. Helmet()?
+- Set up rate limiting.
+
+- Helmet()?
 
 - Make a battle system using sockets.broadcast !

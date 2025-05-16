@@ -23,6 +23,10 @@ petRouter.get("/", async (req, res) => {
 
     const pet = await pets.findOne({ ownerId: ownerObjectId });
 
+    if (!pet) {
+        return res.status(404).json({ message: "Pet not found!" });
+    }
+
     return res.status(200).json({ message: "Pet found!", pet });
 
 });
