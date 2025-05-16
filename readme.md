@@ -1,7 +1,7 @@
 # ** TODO **
 - Set up auth/protected routing on frontend routes (DONE)
 
-- Set up toaster messages !
+- Set up toaster messages ! ! !
 
 - Set up update user info in frontend
 - Set up change password in frontend
@@ -22,3 +22,5 @@
 - Make a battle system using sockets.broadcast !
 
 - Maybe add a footer?
+
+- Clean update and delete functionality in frontend !
