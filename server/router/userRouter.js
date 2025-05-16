@@ -110,10 +110,12 @@ userRouter.put('/update', async (req, res) => {
 userRouter.put('/updatePassword', async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const userObjectId = new ObjectId(req.session.userId);
-    const user = await users.findOne({ _id: userObjectId});
+    const user = await users.findOne({ _id: userObjectId });
 
     if (!user) {
         return res.status(404).json({ message: 'User not found!' });
+    } else if (!(await comparePassword(oldPassword, user.password))) {
+        return res.status(401).json({ message: 'Invalid credentials!' });
     }
 
     const hashedPassword = await hashPassword(newPassword);
