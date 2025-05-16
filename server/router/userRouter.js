@@ -5,7 +5,7 @@ import {hashPassword, comparePassword} from '../util/hasher.js';
 import { sendEmail } from '../util/emailer.js';
 
 const userRouter = Router();
-const { users } = dbConnection;
+const { users, pets } = dbConnection;
 
 // WILL MAYBE NEED THIS LATER, WE'LL SEE
 // userRouter.get('/profile', async (req, res) => {
@@ -134,6 +134,7 @@ userRouter.put('/updatePassword', async (req, res) => {
 userRouter.delete('/delete', async (req, res) => {
     const userObjectId = new ObjectId(req.session.userId);
     const user = await users.findOne({ _id: userObjectId});
+    const usersPet = await pets.findOne({ ownerId: userObjectId });
 
     if (!req.session.userId) {
         return res.status(401).json({ message: 'No user logged in!' });
@@ -142,6 +143,7 @@ userRouter.delete('/delete', async (req, res) => {
     }
 
     await users.deleteOne({ _id: userObjectId });
+    await pets.deleteOne({ ownerId: userObjectId });
     req.session.destroy();
     return res.status(200).json({ message: 'You deleted your user succesfully!', username: user.username });
     

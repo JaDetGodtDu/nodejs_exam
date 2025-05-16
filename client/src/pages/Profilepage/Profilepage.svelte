@@ -1,8 +1,9 @@
 <script>
     import '../page.css';
-    import {onMount} from 'svelte';
+    import { navigate } from 'svelte-routing';
     import {session} from '../../stores/sessionStore';
     import { updateUser } from '../../util/updateUser';
+    import { deleteUser } from '../../util/deleteUser';
 
     import ChangePasswordWindow from '../../components/ChangePasswordWindow/ChangePasswordWindow.svelte';
     let showChangePasswordWindow = false;
@@ -20,6 +21,23 @@
         const result = await updateUser(username, email);
         if (result.success) {
             session.update(user => ({ ...user, username, email }));
+        }
+    }
+    async function handleDelete(){
+        if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            return;
+        }
+        const result = await deleteUser();
+        alert(result.message);
+        if (result.success) {
+            session.set({
+                isLoggedIn: false,
+                userId: null,
+                isAdmin: false,
+                username: null,
+                email: null,
+            });
+            navigate('/');
         }
     }
 </script>
@@ -47,8 +65,10 @@
         <br />
         <button type="submit">Update Info</button>
         <br />
-        <button type="button" on:click={() => showChangePasswordWindow = true}>Change Password</button>
-        <ChangePasswordWindow open={showChangePasswordWindow} onClose={() => showChangePasswordWindow = false} />
-</form>
-
+    </form>
+    <button type="button" on:click={() => showChangePasswordWindow = true}>Change Password</button>
+    <ChangePasswordWindow open={showChangePasswordWindow} onClose={() => showChangePasswordWindow = false} />
+    <button type="button" style="color: red; margin-top: 2rem;" on:click={handleDelete}>
+        Delete Account
+    </button>
 </div>
