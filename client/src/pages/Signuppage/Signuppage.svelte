@@ -5,9 +5,10 @@
     let username = '';
     let password = '';
     let email = '';
+    let petname = '';
 
     const handleSignup = () => {
-        signup(username, password, email)
+        signup(username, password, email, petname)
         }
 </script>
 
@@ -16,6 +17,7 @@
     <h1>Signup</h1>
 
     <form on:submit|preventDefault={handleSignup}>
+      <p>User info:</p>
   <label>
     Username:
     <input type="text" bind:value={username} required />
@@ -30,6 +32,12 @@
     Email:
     <input type="email" bind:value={email} required />
   </label>
+  <br />
+  <label>
+    Pet name:
+    <input type="text" bind:value={petname} required />
+  </label>
+  <br />
   <br />
   <button type="submit">Signup</button>
 </form>

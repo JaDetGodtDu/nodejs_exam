@@ -56,7 +56,7 @@ userRouter.post('/signup', async (req, res) => {
         return res.status(500).json({ message: 'Error sending welcome email!' });
     }
 
-    return res.status(201).json({ message: 'User created successfully!', previewUrl: welcomeEmail.previewUrl });
+    return res.status(201).json({ message: 'User created successfully!', userId: newUser.insertedId, previewUrl: welcomeEmail.previewUrl });
 
 });
 
