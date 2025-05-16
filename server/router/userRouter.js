@@ -2,6 +2,7 @@ import {Router} from 'express';
 import dbConnection from '../database/dbConnection.js';
 import {ObjectId} from 'mongodb';
 import {hashPassword, comparePassword} from '../util/hasher.js';
+import { sendEmail } from '../util/emailer.js';
 
 const userRouter = Router();
 const { users } = dbConnection;
@@ -42,8 +43,16 @@ userRouter.post('/signup', async (req, res) => {
         isAdmin: false,
     });
 
+    const welcomeEmail = await sendEmail(
+        email, 
+        `Welcome to Bingoloids!`, 
+        `Hello ${username}, welcome to Bingoloids - your pet life simulator!`
+    );
+
     if (!newUser) {
         return res.status(500).json({ message: 'Error creating user!' });
+    } else if (!welcomeEmail.success) {
+        return res.status(500).json({ message: 'Error sending welcome email!' });
     }
 
     return res.status(201).json({ message: 'User created successfully!' });

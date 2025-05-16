@@ -1,5 +1,7 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+
 import sessionHandler from './util/sessionHandler.js';
 import { petStatDecay } from './util/petStatDecay.js';
 
