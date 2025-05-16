@@ -2,7 +2,8 @@
     import './Frontpage.css'
     import '../page.css';
 </script>
-<div class="page" id="frontpage">
+<div class="page">
+    <div id="frontpage">
     <h1>BINGOLOIDS</h1>
     <img src="shiba.gif" alt="shiba" id="shiba-img" />
     <h2>Your very own pet life & battle simulator!</h2>
@@ -11,6 +12,6 @@
     <br>
     <p>If you feel lucky, you can take the biggest gamble and pit your pet against another players pet, in a battle of life or death!</p>
     <p>You will have nothing but glory to win and everything to lose!</p>
-    
+    </div>
 </div>
 

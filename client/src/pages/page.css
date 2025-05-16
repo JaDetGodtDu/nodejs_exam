@@ -6,8 +6,10 @@
     position: relative;
     
     background-color: #242424;
-    border: #1a1a1a solid 1px;
+    border: #9612b1 solid 0.25px;
     border-radius: 10px;
+
+    box-shadow: 0 0 20px 0 rgba(10, 10, 10, 10);
 
     width: 50vw;
     height: 75vh;

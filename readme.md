@@ -6,8 +6,8 @@
 - Set up update user info in frontend
 - Set up change password in frontend
 
-- Set up /signup emailing service in backend
-- Set up /signup creation of pet logic - In the frontend? Automatically when a user is created?
+- Set up /signup emailing service in backend (DONE)
+- Set up /signup creation of pet logic - In the frontend? Automatically when a user is created? (DONE)
 
 - Make death logic for pets
 
@@ -20,3 +20,5 @@
 - Helmet()?
 
 - Make a battle system using sockets.broadcast !
+
+- Maybe add a footer?
