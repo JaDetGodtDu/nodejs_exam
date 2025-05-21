@@ -26,3 +26,4 @@
 
 - Maybe add a footer?
 
+set pet health to 0 string: db.pets.updateOne({name:'Dingus'}, {$set:{health:0}})

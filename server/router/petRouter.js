@@ -26,7 +26,7 @@ petRouter.get("/", async (req, res) => {
     if (!pet) {
         return res.status(404).json({ message: "Pet not found!" });
     } else if (pet.health <= 0) {
-        return res.status(400).json({ message: "Pet is dead!" });
+        return res.status(200).json({ message: "Pet is dead!", pet: { name: pet.name, _id: pet._id } });
     }
 
     return res.status(200).json({ message: "Pet found!", pet });
@@ -63,7 +63,7 @@ petRouter.post("/action", async (req, res) => {
     if (!pet) {
         return res.status(404).json({ message: "Pet not found!" });
     } else if (pet.health <= 0) {
-        return res.status(400).json({ message: "Pet is dead!" });
+        return res.status(200).json({ message: "Pet is dead!" });
     }
 
     const updatedPet = { ...pet};

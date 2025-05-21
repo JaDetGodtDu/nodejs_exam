@@ -1,7 +1,7 @@
 const url = 'http://localhost:8080/pets';
 
 export async function deletePet(petId) {
-    const response = await fetch(`${url}?petId=${petId}`, {
+    const response = await fetch(`${url}/delete/${petId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
