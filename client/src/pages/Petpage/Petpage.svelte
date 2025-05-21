@@ -13,6 +13,7 @@
     let petAge = null;
     let ageCounter;
 
+
     session.subscribe((value) => {
         ownerId = value.userId;
     });
@@ -41,16 +42,13 @@
 
             pet = { ...pet, ...data.pet };
             console.log(`Action ${action} performed successfully!`, data);
-            
-            // petAge = getPetAge(pet.createdAt, pet.lastUpdated);
-            // console.log(petAge.lastUpdatedDate);
         } catch (err) {
             console.error(`Error performing action ${action}:`, err.message);
         }
     }
 </script>
 <div id='petpage' class="page">
-    {#if pet}
+    {#if pet && getPetAge}
     <div id='actions-container'>
         <button class='pet-action-btn' on:click={() => handleAction('feed')}>Feed</button>
         <button class='pet-action-btn' on:click={() => handleAction('pet')}>Pet</button>
