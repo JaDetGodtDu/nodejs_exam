@@ -45,6 +45,10 @@ export async function logout() {
             username: null,
             email: null,
         });
+        localStorage.removeItem("username");
+        localStorage.removeItem("token");
+        localStorage.removeItem("roles");
+        localStorage.removeItem("session");
         navigate("/");
         return {success: true, message: "Logout successful!" };
     } else {

@@ -83,8 +83,10 @@ userRouter.post('/logout', (req, res) => {
     if (!req.session.userId) {
         return res.status(400).json({ message: 'No user logged in!' });
     }
-    req.session.destroy();
-    return res.status(200).json({ message: 'Logged out successfully!' });
+    req.session.destroy(()=>{
+        res.clearCookie('connect.sid');
+        return res.status(200).json({ message: 'Logged out successfully!' });
+    });
 });
 
 userRouter.put('/update', async (req, res) => {
