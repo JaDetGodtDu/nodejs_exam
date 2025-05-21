@@ -12,7 +12,7 @@
 - Set up /signup creation of pet logic - In the frontend? Automatically when a user is created? (DONE)
 
 
-- Add more stat logic (Can't play when energy=0, hunger=0 decays health etc.)
+- Add more stat logic (Can't play when energy=0, hunger=0 decays health etc.) (DONE)
 
 - Set up admin system in frontend
 
