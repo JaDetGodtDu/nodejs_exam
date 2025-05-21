@@ -1,11 +1,9 @@
 # ** TODO **
 - Set up auth/protected routing on frontend routes (DONE)
 
-- Set up toaster messages ! ! !
+- Set up toaster messages ! ! ! (DONE)
 
 - Make death logic for pets ! ! ! (DONE)
-
-- Clean update and delete functionality in frontend !
 
 - Set up update user info in frontend (DONE)
 - Set up change password in frontend (DONE)
@@ -14,7 +12,7 @@
 - Set up /signup creation of pet logic - In the frontend? Automatically when a user is created? (DONE)
 
 
-- Add more stat logic (Can't play when energy=0 etc.)
+- Add more stat logic (Can't play when energy=0, hunger=0 decays health etc.)
 
 - Set up admin system in frontend
 
@@ -23,6 +21,8 @@
 - Helmet()?
 
 - Make a battle system using sockets.broadcast !
+
+- Clean update and delete functionality in frontend !
 
 - Maybe add a footer?
 
