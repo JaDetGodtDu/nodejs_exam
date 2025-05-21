@@ -63,10 +63,14 @@
 
     async function handleAction(action) {
         try {
-            const data = await performPetAction(pet._id, action);
+            const response = await performPetAction(pet._id, action);
 
-            pet = { ...pet, ...data.pet };
-            showSuccess(`Action "${action}" performed!`);
+            pet = { ...pet, ...response.pet };
+            if(response.succes === false){
+                showWarning(response.message);
+            } else {
+                showSuccess(`Action "${action}" performed!`);
+            }
         } catch (err) {
             showError(`Error performing action: ${err.message}`);
         }

@@ -69,19 +69,34 @@ petRouter.post("/action", async (req, res) => {
     const updatedPet = { ...pet};
     switch (action) {
         case "feed":
+            if (pet.hunger === 100) {
+                return res.status(400).json({ message: "Pet is not hungry!" });
+            }
             updatedPet.hunger = Math.min(updatedPet.hunger + 10, 100);
             break;
         case "pet":
             updatedPet.happiness = Math.min(updatedPet.happiness + 5, 100);
             break;
         case "play":
+            if (pet.energy <= 5) {
+                return res.status(200).json({ succes:false, message: "Not enough energy to play!" });
+            }
             updatedPet.energy = Math.max(updatedPet.energy - 5, 0);
             updatedPet.happiness = Math.min(updatedPet.happiness + 10, 100);
             break;
         case "heal":
+            if (pet.health === 100) {
+                return res.status(200).json({ succes:false, message: "Pet is already healthy!" });
+            }
             updatedPet.health = Math.min(updatedPet.health + 10, 100);
             break;
         case "rest":
+            if (pet.energy === 100) {
+                return res.status(200).json({ succes:false, message: "Pet is not tired!" });
+            }
+            if (pet.happiness === 0){
+                return res.status(200).json({ succes:false, message: "Pet is too sad to rest!" });
+            }
             updatedPet.energy = Math.min(updatedPet.energy + 10, 100);
             break;
         default:
