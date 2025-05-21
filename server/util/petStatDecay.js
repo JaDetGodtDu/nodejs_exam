@@ -16,10 +16,24 @@ export function petStatDecay() {
                 let newEnergy = Math.max(0, pet.energy - (hoursPassed * 2));
 
                 let newHealth = pet.health;
-                if (newHunger === 0) {
+                
+                if (newHunger <=50) {
                     newHealth = Math.max(0, pet.health - (hoursPassed * 2));
+                    newEnergy = Math.max(0, pet.energy - (hoursPassed * 2));
+                    newHappiness = Math.max(0, pet.happiness - (hoursPassed * 2));
+                } else if (newHunger <=25) {
+                    newHealth = Math.max(0, pet.health - (hoursPassed * 4));
+                    newEnergy = Math.max(0, pet.energy - (hoursPassed * 4));
+                    newHappiness = Math.max(0, pet.happiness - (hoursPassed * 4));
+                } else if (newHunger === 0){
+                    newHealth = Math.max(0, pet.health - (hoursPassed * 6));
+                    newEnergy = Math.max(0, pet.energy - (hoursPassed * 6));
+                    newHappiness = Math.max(0, pet.happiness - (hoursPassed * 6));
                 }
 
+                if (newHappiness === 0) {
+                    newEnergy = Math.max(0, pet.energy - (hoursPassed * 2));
+                }
                 await pets.updateOne(
                     { _id: pet._id },
                     {
