@@ -9,6 +9,7 @@
     import { performPetAction } from '../../util/performPetAction';
     import { getPetAge } from '../../util/middleware/getPetAge';
     import { getPetImg } from '../../util/middleware/getPetImg';
+    import { showSuccess, showError, showInfo, showWarning } from '../../util/toaster';
 
     let pet = null;
     let ownerId = null;
@@ -18,6 +19,8 @@
     let petDead = false;
     let deadPetName;
     let deadPetId;
+
+    let newPetName;
 
     session.subscribe((value) => {
         ownerId = value.userId;
@@ -63,24 +66,30 @@
             const data = await performPetAction(pet._id, action);
 
             pet = { ...pet, ...data.pet };
-            console.log(`Action ${action} performed successfully!`, data);
+            showSuccess(`Action "${action}" performed!`);
         } catch (err) {
-            console.error(`Error performing action ${action}:`, err.message);
+            showError(`Error performing action: ${err.message}`);
         }
     }
     async function handleDeadPet(){
-        const name = prompt("Enter a name for your new pet:");
-        if (!name) return;
+        if (!newPetName.trim()) {
+            showWarning("Please enter a name for your new pet.");
+            return;
+        }
 
-        await deletePet(deadPetId);
+        const deleteResult = await deletePet(deadPetId);
+        if (deleteResult.message !== "Pet deleted successfully!") {
+            showError("Failed to delete dead pet.");
+            return;
+        }
 
-        const data = await createPet(ownerId, name);
-
-        await loadPet();
-        petDead = false;
-        if (pet) {
-            petAge = getPetAge(pet.createdAt, pet.lastUpdated);
-            pet = { ...pet, ...data.pet };
+        const createResult = await createPet(ownerId, newPetName);
+        if (createResult.petId) {
+            showSuccess("New pet created!");
+            await loadPet();
+            newPetName = "";
+        } else {
+            showError("Failed to create new pet.");
         }
     }
 </script>
@@ -89,7 +98,13 @@
         <div id='pet-dead'>
             <h2>{deadPetName} is dead!</h2>
             <p>Would you like to create a new pet?</p>
-            <button on:click={handleDeadPet}>Create New Pet</button>
+            <input
+            type="text"
+            placeholder="Enter new pet name"
+            bind:value={newPetName}
+            on:keydown={(e) => e.key === 'Enter' && handleDeadPet()}
+        />
+        <button on:click={handleDeadPet}>Create New Pet</button>
         </div>
     {:else if pet && getPetAge}
     <div id='actions-container'>

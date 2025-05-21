@@ -1,15 +1,26 @@
 <script>
-    import '../page.css';
-    import signup from '../../util/signup';
+  import '../page.css';
+  import signup from '../../util/signup';
+  import { showSuccess, showError, showWarning } from '../../util/toaster.js';
 
-    let username = '';
-    let password = '';
-    let email = '';
-    let petname = '';
+  let username = '';
+  let password = '';
+  let email = '';
+  let petname = '';
 
-    const handleSignup = () => {
-        signup(username, password, email, petname)
-        }
+  const handleSignup = async () => {
+    if (!username || !password || !email || !petname) {
+      showWarning("Please fill in all fields.");
+      return;
+    }
+    const result = await signup(username, password, email, petname);
+    if (result.success) {
+      showSuccess(result.message || "Signup successful!");
+      // Optionally, redirect or clear fields here
+    } else {
+      showError(result.message || "Signup failed.");
+    }
+  }
 </script>
 
 <div class='page'>

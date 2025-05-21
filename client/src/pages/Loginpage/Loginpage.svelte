@@ -1,6 +1,6 @@
 <script>
     import { login } from "../../util/auth.js";
-    // import { showSuccess, showError } from "../../util/toaster.js";
+    import { showSuccess, showError } from "../../util/toaster.js";
     import '../page.css';
 
     let username = "";
@@ -8,11 +8,11 @@
 
     const handleLogin = async () => {
       const result = await login(username, password);
-    //   if (result.success) {
-    //     showSuccess(result.message);
-    //   } else {
-    //     showError(result.message);
-    //   }
+      if (result.success) {
+        showSuccess(result.message);
+      } else {
+        showError(result.message);
+      }
     };
 </script>
 

@@ -1,5 +1,6 @@
 <script>
     import { changePassword } from "../../util/changePassword";
+    import { showSuccess, showError, showWarning } from "../../util/toaster.js";
 
     export let open = false;
     export let onClose = () => {};
@@ -10,16 +11,28 @@
 
 
     async function handleSubmit(event) {
-            event.preventDefault();
-            const result = await changePassword(oldPassword, newPassword, confirmPassword);
+        event.preventDefault();
 
-            if (result.success) {
-                oldPassword = '';
-                newPassword = '';
-                confirmPassword = '';
-                setTimeout(onClose, 1200);
-            }
+        if (!oldPassword || !newPassword || !confirmPassword) {
+            showWarning("Please fill in all fields.");
+            return;
         }
+        if (newPassword !== confirmPassword) {
+            showWarning("New passwords do not match.");
+            return;
+        }
+        
+        const result = await changePassword(oldPassword, newPassword, confirmPassword);
+        if (result.success) {
+            showSuccess(result.message || "Password changed!");
+            oldPassword = '';
+            newPassword = '';
+            confirmPassword = '';
+            setTimeout(onClose, 1200);
+        } else {
+        showError(result.message || "Failed to change password.");
+        }
+    }
 </script>
 
 {#if open}

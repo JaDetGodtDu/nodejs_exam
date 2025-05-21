@@ -4,6 +4,7 @@
     import {session} from '../../stores/sessionStore';
     import { updateUser } from '../../util/updateUser';
     import { deleteUser } from '../../util/deleteUser';
+    import { showSuccess, showError, showWarning } from '../../util/toaster.js';
 
     import ChangePasswordWindow from '../../components/ChangePasswordWindow/ChangePasswordWindow.svelte';
     let showChangePasswordWindow = false;
@@ -21,23 +22,29 @@
         const result = await updateUser(username, email);
         if (result.success) {
             session.update(user => ({ ...user, username, email }));
+            showSuccess(result.message || "Profile updated!");
+        } else {
+            showError(result.message || "Failed to update profile.");
         }
     }
     async function handleDelete(){
         if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            showWarning("Account deletion cancelled.");
             return;
         }
         const result = await deleteUser();
-        alert(result.message);
         if (result.success) {
+            showSuccess(result.message || "Account deleted.");
             session.set({
-                isLoggedIn: false,
-                userId: null,
-                isAdmin: false,
-                username: null,
-                email: null,
+            isLoggedIn: false,
+            userId: null,
+            isAdmin: false,
+            username: null,
+            email: null,
             });
             navigate('/');
+        } else {
+            showError(result.message || "Failed to delete account.");
         }
     }
 </script>
