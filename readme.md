@@ -3,7 +3,7 @@
 
 - Set up toaster messages ! ! !
 
-- Make death logic for pets ! ! !
+- Make death logic for pets ! ! ! (DONE)
 
 - Clean update and delete functionality in frontend !
 
