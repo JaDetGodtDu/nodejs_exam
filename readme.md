@@ -3,13 +3,16 @@
 
 - Set up toaster messages ! ! !
 
-- Set up update user info in frontend
-- Set up change password in frontend
+- Make death logic for pets ! ! !
+
+- Clean update and delete functionality in frontend !
+
+- Set up update user info in frontend (DONE)
+- Set up change password in frontend (DONE)
 
 - Set up /signup emailing service in backend (DONE)
 - Set up /signup creation of pet logic - In the frontend? Automatically when a user is created? (DONE)
 
-- Make death logic for pets
 
 - Add more stat logic (Can't play when energy=0 etc.)
 
@@ -23,4 +26,3 @@
 
 - Maybe add a footer?
 
-- Clean update and delete functionality in frontend !

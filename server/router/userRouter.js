@@ -141,7 +141,7 @@ userRouter.delete('/delete', async (req, res) => {
     } else if (!user) {
         return res.status(404).json({ message: 'User not found!' });
     }
-
+ 
     await users.deleteOne({ _id: userObjectId });
     await pets.deleteOne({ ownerId: userObjectId });
     req.session.destroy();
