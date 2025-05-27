@@ -1,5 +1,5 @@
+import 'dotenv/config';
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
 
 const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",

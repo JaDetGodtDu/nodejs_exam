@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { hashPassword } from "../util/hasher.js";
 import dbConnection from "./dbConnection.js";
 

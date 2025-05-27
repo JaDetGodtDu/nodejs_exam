@@ -1,9 +1,9 @@
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/pixelPalsDB';
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
-const databaseName = process.env.MONGODB_DB || 'pixelPalsDB';
+const databaseName = process.env.MONGODB_DB;
 
 await client.connect();
 
