@@ -13,7 +13,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "seedDB": "cd database && node seedDB.js"
+    "seedDB": "node database/seedDB.js"
   },
   "keywords": [],
   "author": "",
