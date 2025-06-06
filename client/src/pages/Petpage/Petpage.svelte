@@ -3,10 +3,11 @@
     import './Petpage.css';
     import { onMount, onDestroy } from 'svelte';
     import { session } from '../../stores/sessionStore';
-    import { fetchPet } from '../../util/fetchPet';
-    import { deletePet } from '../../util/deletePet';
-    import { createPet } from '../../util/createPet';
-    import { performPetAction } from '../../util/performPetAction';
+    import { fetchPet, 
+             deletePet, 
+             createPet, 
+             performPetAction 
+            } from '../../util/petApi.js';
     import { getPetAge } from '../../util/middleware/getPetAge';
     import { getPetImg } from '../../util/middleware/getPetImg';
     import { showSuccess, showError, showInfo, showWarning } from '../../util/toaster';

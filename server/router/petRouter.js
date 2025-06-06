@@ -70,7 +70,7 @@ petRouter.post("/action", async (req, res) => {
     switch (action) {
         case "feed":
             if (pet.hunger === 100) {
-                return res.status(400).json({ message: "Pet is not hungry!" });
+                return res.status(200).json({ succes:false, message: "Pet is not hungry!" });
             }
             updatedPet.hunger = Math.min(updatedPet.hunger + 10, 100);
             break;
