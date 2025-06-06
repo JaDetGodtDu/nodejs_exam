@@ -1,5 +1,5 @@
 <script>
-    import { changePassword } from "../../util/changePassword";
+    import { changePassword } from "../../util/userApi.js";
     import { showSuccess, showError, showWarning } from "../../util/toaster.js";
 
     export let open = false;

@@ -1,6 +1,6 @@
 <script>
   import '../page.css';
-  import signup from '../../util/signup';
+  import {signup} from '../../util/userApi.js';
   import { showSuccess, showError, showWarning } from '../../util/toaster.js';
 
   let username = '';

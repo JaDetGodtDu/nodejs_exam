@@ -1,5 +1,5 @@
 <script>
-    import { login } from "../../util/auth.js";
+    import { login } from "../../util/userApi.js";
     import { showSuccess, showError } from "../../util/toaster.js";
     import '../page.css';
 

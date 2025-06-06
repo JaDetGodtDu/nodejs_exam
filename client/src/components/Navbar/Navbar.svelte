@@ -3,7 +3,7 @@
     import { Link } from "svelte-routing";
     import { onMount } from 'svelte';
     import { session } from '../../stores/sessionStore';
-    import { logout } from '../../util/auth.js';
+    import { logout } from '../../util/userApi.js';
 
     let isLoggedIn = false;
     let isAdmin = false;

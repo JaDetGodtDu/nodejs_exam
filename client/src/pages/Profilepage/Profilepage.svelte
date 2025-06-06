@@ -2,8 +2,7 @@
     import '../page.css';
     import { navigate } from 'svelte-routing';
     import {session} from '../../stores/sessionStore';
-    import { updateUser } from '../../util/updateUser';
-    import { deleteUser } from '../../util/deleteUser';
+    import { updateUser, deleteUser } from '../../util/userApi.js';
     import { showSuccess, showError, showWarning } from '../../util/toaster.js';
 
     import ChangePasswordWindow from '../../components/ChangePasswordWindow/ChangePasswordWindow.svelte';
