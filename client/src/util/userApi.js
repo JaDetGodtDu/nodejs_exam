@@ -85,6 +85,26 @@ export async function logout() {
     }
 }
 
+export async function saveDeadPet(pet) {
+    const response = await fetch("http://localhost:8080/users/pastPets", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            name: pet.name,
+            createdAt: pet.createdAt,
+            diedAt: new Date(),
+        }),
+    })
+    if (!response.ok) {
+        const error = await response.json();
+        return { success: false, message: error.message || "Failed to save dead pet!" };
+    }
+    return await response.json();
+}
+
 export async function updateUser( username, email) {
     const response = await fetch(`${url}/update`, {
         method: "PUT",

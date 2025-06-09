@@ -9,12 +9,24 @@ async function seedDB() {
         password: await hashPassword("adminpass"),
         email: "admin@example.com",
         isAdmin: true,
+        pastPets: [],
     },
     {
         username: "user1",
         password: await hashPassword("user1pass"),
         email: "user1@example.com",
         isAdmin: false,
+        pastPets: [],
+    },
+    {
+        username: "user2",
+        password: await hashPassword("user2pass"),
+        email: "user2@example.com",
+        pastPets: [{
+            name:" Bombus",
+            createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
+            diedAt: new Date(),
+        }],
     }]
 
     const clearUsers = await db.collection("users").deleteMany({});
@@ -44,7 +56,19 @@ async function seedDB() {
         energy: 100,
         createdAt: new Date(),
         lastUpdated: new Date(),
-    }]
+    },
+    {
+        ownerId: seededUsersResult.insertedIds[2],
+        name: "Fingus",
+        type: 3,
+        hunger: 0,
+        happiness: 0,
+        health: 0,
+        energy: 0,
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 15 days ago
+        lastUpdated: new Date(),
+    }
+]
 
     const clearPets = await db.collection("pets").deleteMany({});
     console.log(`Cleared pets collection!\n`, clearPets, `\nCleared ${clearPets.deletedCount} pets!`);

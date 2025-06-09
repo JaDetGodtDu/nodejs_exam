@@ -89,6 +89,22 @@ userRouter.post('/logout', (req, res) => {
     });
 });
 
+userRouter.post('/pastPets', async (req, res) => {
+    const userObjectId = new ObjectId(req.session.userId);
+    const user = await users.findOne({ _id: userObjectId });
+
+    const {name, createdAt, diedAt} = req.body;
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found!' });
+    }
+    await users.updateOne(
+        { _id: userObjectId },
+        { $push: { pastPets: { name, createdAt, diedAt } } }
+    );
+    return res.status(200).json({ message: 'Pet added to past pets successfully!', name, createdAt, diedAt });
+})
+
 userRouter.put('/update', async (req, res) => {
     const { username, email} = req.body;
     const userObjectId = new ObjectId(req.session.userId);

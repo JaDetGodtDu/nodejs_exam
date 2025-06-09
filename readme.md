@@ -22,6 +22,8 @@
 
 - Make a battle system using sockets.broadcast !
 
+- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived.
+
 - Clean update and delete functionality in frontend !
 
 - Maybe add a footer?

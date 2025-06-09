@@ -6,8 +6,9 @@
     import { fetchPet, 
              deletePet, 
              createPet, 
-             performPetAction 
+             performPetAction, 
             } from '../../util/petApi.js';
+    import { saveDeadPet } from '../../util/userApi';
     import { getPetAge } from '../../util/middleware/getPetAge';
     import { getPetImg } from '../../util/middleware/getPetImg';
     import { showSuccess, showError, showInfo, showWarning } from '../../util/toaster';
@@ -15,11 +16,14 @@
     let pet = null;
     let ownerId = null;
     let petAge = null;
+
     let ageCounter;
 
     let petDead = false;
     let deadPetName;
     let deadPetId;
+
+    let lastPet = null;
 
     let newPetName;
 
@@ -33,10 +37,12 @@
             petDead = true;
             deadPetName = response.pet.name;
             deadPetId = response.pet._id;
+            lastPet = response.pet;
             pet = null;
             return;
         } else if (response.pet){
             pet = response.pet;
+            lastPet = response.pet;
             petDead = false;
             petAge = getPetAge(pet.createdAt, pet.lastUpdated);
         }
@@ -81,6 +87,12 @@
             showWarning("Please enter a name for your new pet.");
             return;
         }
+        console.log(lastPet);
+        await saveDeadPet({
+        name: deadPetName,
+        createdAt: lastPet?.createdAt || null,
+        diedAt: new Date().toISOString()
+        });
 
         const deleteResult = await deletePet(deadPetId);
         if (deleteResult.message !== "Pet deleted successfully!") {
