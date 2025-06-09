@@ -20,12 +20,13 @@
 {#if pastPets.length === 0}
     <p>No past pets yet!</p>
 {:else}
-    <ul>
+
         {#each pastPets as pet}
+            {@const age = getPetAge(pet.createdAt, pet.diedAt)}
             <li>
                 <strong>{pet.name}</strong><br>
-                Lifespan: {getPetAge(pet.createdAt, pet.diedAt).days}d {getPetAge(pet.createdAt, pet.diedAt).hours}h {getPetAge(pet.createdAt, pet.diedAt).minutes}m<br>
+                Lifespan: {age.days}d {age.hours}h {age.minutes}m<br>
             </li>
         {/each}
-    </ul>
+
 {/if}

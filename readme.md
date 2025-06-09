@@ -11,8 +11,9 @@
 - Set up /signup emailing service in backend (DONE)
 - Set up /signup creation of pet logic - In the frontend? Automatically when a user is created? (DONE)
 
-
 - Add more stat logic (Can't play when energy=0, hunger=0 decays health etc.) (DONE)
+
+- FIX THE ALERT WHEN DELETING ACCOUNT ! ! !
 
 - Set up admin system in frontend
 
@@ -22,7 +23,7 @@
 
 - Make a battle system using sockets.broadcast !
 
-- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived.
+- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
 - Clean update and delete functionality in frontend !
 

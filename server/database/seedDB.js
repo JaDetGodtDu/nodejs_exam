@@ -65,7 +65,7 @@ async function seedDB() {
         happiness: 0,
         health: 0,
         energy: 0,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 15 days ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15), 
         lastUpdated: new Date(),
     }
 ]
