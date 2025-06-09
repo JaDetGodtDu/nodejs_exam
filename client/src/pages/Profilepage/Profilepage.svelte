@@ -8,6 +8,8 @@
     import ChangePasswordWindow from '../../components/ChangePasswordWindow/ChangePasswordWindow.svelte';
     let showChangePasswordWindow = false;
 
+    import Graveyard from '../../components/Graveyard/Graveyard.svelte';
+
     let username;
     let email;
 
@@ -77,4 +79,5 @@
     <button type="button" style="color: red; margin-top: 2rem;" on:click={handleDelete}>
         Delete Account
     </button>
+    <Graveyard />
 </div>
