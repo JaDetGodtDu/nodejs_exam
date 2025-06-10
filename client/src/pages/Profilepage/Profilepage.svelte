@@ -34,10 +34,6 @@
         showConfirmDelete = true;
     }
     async function handleDelete(){
-        // if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-        //     showWarning("Account deletion cancelled.");
-        //     return;
-        // }
         showConfirmDelete = false;
         const result = await deleteUser();
         if (result.success) {
