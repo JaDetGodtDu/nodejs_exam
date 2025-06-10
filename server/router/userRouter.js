@@ -71,6 +71,9 @@ userRouter.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'User already logged in!' });
     }
     req.session.userId = user._id;
+    req.session.isAdmin = user.isAdmin;
+    req.session.username = user.username;
+    req.session.email = user.email;
     return res.status(200).json({ 
         message: 'Login successful!', 
         userId: user._id, 

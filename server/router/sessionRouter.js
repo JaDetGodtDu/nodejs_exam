@@ -8,7 +8,7 @@ router.get("/session", (req, res) => {
             isLoggedIn: true,
             userId: req.session.userId,
             isAdmin: req.session.isAdmin,
-            name: req.session.name,
+            username: req.session.username,
             email: req.session.email,
         });
     } else {
@@ -16,7 +16,7 @@ router.get("/session", (req, res) => {
             isLoggedIn: false,
             userId: null,
             isAdmin: false,
-            name: null,
+            username: null,
             email: null,
         });
     }

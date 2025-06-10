@@ -11,7 +11,7 @@ export default async function fetchSession() {
             isLoggedIn: data.isLoggedIn,
             userId: data.userId,
             isAdmin: data.isAdmin,
-            username: data.name,
+            username: data.username,
             email: data.email,
         });
     } else {
