@@ -13,7 +13,9 @@
 
 - Add more stat logic (Can't play when energy=0, hunger=0 decays health etc.) (DONE)
 
-- FIX THE ALERT WHEN DELETING ACCOUNT ! ! !
+- FIX THE ALERT WHEN DELETING ACCOUNT (DONE)
+
+- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
 - Set up admin system in frontend
 
@@ -22,8 +24,6 @@
 - Helmet()?
 
 - Make a battle system using sockets.broadcast !
-
-- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
 - Clean update and delete functionality in frontend !
 

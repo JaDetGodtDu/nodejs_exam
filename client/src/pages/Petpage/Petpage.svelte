@@ -87,7 +87,6 @@
             showWarning("Please enter a name for your new pet.");
             return;
         }
-        console.log(lastPet);
         await saveDeadPet({
         name: deadPetName,
         createdAt: lastPet?.createdAt || null,
