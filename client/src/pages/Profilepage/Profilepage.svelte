@@ -8,7 +8,8 @@
     import ChangePasswordWindow from '../../components/ChangePasswordWindow/ChangePasswordWindow.svelte';
     let showChangePasswordWindow = false;
 
-    import Graveyard from '../../components/Graveyard/Graveyard.svelte';
+    import ConfirmModal from '../../components/ConfirmModal/ConfirmModal.svelte';
+    let showConfirmDelete = false;
 
     let username;
     let email;
@@ -28,11 +29,16 @@
             showError(result.message || "Failed to update profile.");
         }
     }
+
+    async function showDeleteModal() {
+        showConfirmDelete = true;
+    }
     async function handleDelete(){
-        if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-            showWarning("Account deletion cancelled.");
-            return;
-        }
+        // if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+        //     showWarning("Account deletion cancelled.");
+        //     return;
+        // }
+        showConfirmDelete = false;
         const result = await deleteUser();
         if (result.success) {
             showSuccess(result.message || "Account deleted.");
@@ -47,6 +53,9 @@
         } else {
             showError(result.message || "Failed to delete account.");
         }
+    }
+    function cancelDelete() {
+        showConfirmDelete = false;
     }
 </script>
 
@@ -74,10 +83,17 @@
         <button type="submit">Update Info</button>
         <br />
     </form>
+    
     <button type="button" on:click={() => showChangePasswordWindow = true}>Change Password</button>
     <ChangePasswordWindow open={showChangePasswordWindow} onClose={() => showChangePasswordWindow = false} />
-    <button type="button" style="color: red; margin-top: 2rem;" on:click={handleDelete}>
+
+    <button type="button" style="color: red; margin-top: 2rem;" on:click={showDeleteModal}>
         Delete Account
     </button>
-    <Graveyard />
+    <ConfirmModal 
+        open={showConfirmDelete} 
+        message="Are you sure you want to delete your account?" 
+        onConfirm={handleDelete} 
+        onCancel={cancelDelete}
+    />
 </div>
