@@ -23,7 +23,7 @@ async function seedDB() {
         password: await hashPassword("user2pass"),
         email: "user2@example.com",
         pastPets: [{
-            name:" Bombus",
+            name:"Bombus",
             createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
             diedAt: new Date(),
         }],
