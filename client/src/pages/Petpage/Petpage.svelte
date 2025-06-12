@@ -108,7 +108,8 @@
         }
     }
 </script>
-<div id='petpage' class="page">
+<div class="page">
+    <div id='petpage'>
     {#if petDead}
         <div id='pet-dead'>
             <h2>{deadPetName} is dead!</h2>
@@ -166,4 +167,5 @@
     {:else}
         <p>Loading pet details...</p>
     {/if}
+    </div>
 </div>
