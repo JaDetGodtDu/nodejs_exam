@@ -32,6 +32,8 @@
     - Make it so accepting a battle cancels other requests
     - Fix Chat with scrollbar (DONE)
 
+- Set a limit on pet actions pr hour
+
 - Clean update and delete functionality in frontend !
 
 - Maybe add a footer?
