@@ -1,6 +1,6 @@
 <script>
-    import { onMount } from "svelte";
-    import { socketStore, connectSocket } from "../../stores/socketStore";
+    import { onMount, onDestroy } from "svelte";
+    import { connectSocket } from "../../stores/socketStore";
 
     let username = '';
     let userId = '';
@@ -21,7 +21,7 @@
         socket = connectSocket(username, userId);
 
         socket.on("online-users", (users) => {
-            onlineUsers = users.filter(u => u.userId !== userId);
+            onlineUsers = users.filter(user => user.userId !== userId);
         });
 
         socket.on("chat-message", (data) => {
@@ -38,6 +38,12 @@
         });
     })
 
+    onDestroy(() => {
+        if (socket) {
+            socket.disconnect();
+        }
+    });
+
     function sendMessage() {
         if (message.trim()) {
             socket.emit("chat-message", message);
@@ -51,7 +57,7 @@
 
     function acceptBattle(fromUserId) {
         socket.emit("battle-accept", fromUserId);
-        battleRequests = battleRequests.filter(r => r.fromUserId !== fromUserId);
+        battleRequests = battleRequests.filter(req => req.fromUserId !== fromUserId);
     }
 </script>
 
@@ -68,11 +74,11 @@
 
     <h3>Chat</h3>
     <ul>
-        {#each messages as m}
-            <li><b>{m.from}:</b> {m.msg}</li>
+        {#each messages as message}
+            <li><b>{message.from}:</b> {message.msg}</li>
         {/each}
     </ul>
-    <input bind:value={message} on:keydown={(e) => e.key === "Enter" && sendMessage()} />
+    <input bind:value={message} on:keydown={(event) => event.key === "Enter" && sendMessage()} />
     <button on:click={sendMessage}>Send</button>
 
     {#if battleRequests.length}
