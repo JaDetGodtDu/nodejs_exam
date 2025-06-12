@@ -1,4 +1,6 @@
 <script>
+    import './ChangePasswordWindow.css';
+
     import { changePassword } from "../../util/userApi.js";
     import { showSuccess, showError, showWarning } from "../../util/toaster.js";
 
@@ -73,19 +75,3 @@
     </div>
 </div>
 {/if}
-
-<style>
-/* Why can't I figure out how to move this to its own CSS file?? */
-.modal-backdrop {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
-    height: 100vh;
-    background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
-    z-index: 1000;
-}
-.modal {
-    background: #242424;; padding: 2rem; border-radius: 8px; min-width: 300px;
-}
-</style>

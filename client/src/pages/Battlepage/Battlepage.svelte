@@ -1,6 +1,10 @@
 <script>
+    import ChatWindow from "../../components/ChatWindow/ChatWindow.svelte";
+
     import { onMount, onDestroy } from "svelte";
     import { connectSocket } from "../../stores/socketStore";
+    import { chatSocket } from "../../util/chatSocket";
+    import { battleSocket } from "../../util/battleSocket";
 
     let username = '';
     let userId = '';
@@ -20,21 +24,32 @@
         
         socket = connectSocket(username, userId);
 
-        socket.on("online-users", (users) => {
-            onlineUsers = users.filter(user => user.userId !== userId);
-        });
+        chatSocket(socket, {
+            onMessage: (message) => {
+                messages = [...messages, message];
+            },
+            onOnlineUsers: (users) => {
+                onlineUsers = users.filter(user => user.userId !== userId);
+            },
+        })
 
-        socket.on("chat-message", (data) => {
-            messages = [...messages, data];
-        });
-
-        socket.on("battle-request", (data) => {
-            battleRequests = [...battleRequests, data];
-        });
-
-        socket.on("battle-start", (data) => {
-            activeBattle = true;
-            opponent = data.with;
+        battleSocket(socket, {
+            onBattleRequest: (battleRequest) => {
+                battleRequests = [...battleRequests, battleRequest];
+            },
+            onBattleAccept: (battle) => {
+                activeBattle = true;
+                opponent = battle.opponent;
+                battleRequests = battleRequests.filter(req => req.fromUserId !== battle.fromUserId);
+            },
+            onBattleStart: (battle) => {
+                activeBattle = true;
+                opponent = battle.opponent;
+            },
+            onBattleEnd: () => {
+                activeBattle = false;
+                opponent = null;
+            }
         });
     })
 
@@ -65,21 +80,17 @@
     <h3>Online Users</h3>
     <ul>
         {#each onlineUsers as user}
-            <li>
                 {user.username}
                 <button on:click={() => requestBattle(user.userId)}>Battle!</button>
-            </li>
         {/each}
     </ul>
 
-    <h3>Chat</h3>
-    <ul>
-        {#each messages as message}
-            <li><b>{message.from}:</b> {message.msg}</li>
-        {/each}
-    </ul>
-    <input bind:value={message} on:keydown={(event) => event.key === "Enter" && sendMessage()} />
-    <button on:click={sendMessage}>Send</button>
+    <ChatWindow
+        {messages}
+        bind:message
+        onMessageInput={(event) => message = event.target.value}
+        onSend={sendMessage}
+    />
 
     {#if battleRequests.length}
         <h3>Battle Requests</h3>
