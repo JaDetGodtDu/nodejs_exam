@@ -7,24 +7,6 @@ import { sendEmail } from '../util/emailer.js';
 const userRouter = Router();
 const { users, pets } = dbConnection;
 
-// WILL MAYBE NEED THIS LATER, WE'LL SEE
-// userRouter.get('/profile', async (req, res) => {
-//     const userObjectId = new ObjectId(req.session.userId);
-//     const user = await users.findOne({ _id: userObjectId});
-
-//     if (!req.session.userId) {
-//     return res.status(401).json({ message: 'No user logged in!' });
-//     } else if (!user) {
-//         return res.status(404).json({ message: 'User not found!' });
-//     }
-
-//     return res.status(200).json({
-//         username: user.username,
-//         email: user.email,
-//         isAdmin: user.isAdmin,
-//     });
-
-// });
 userRouter.post('/signup', async (req, res) => {
     const {username, password, email} = req.body;
     const existingUser = await users.findOne({username});

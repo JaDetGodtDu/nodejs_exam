@@ -16,7 +16,6 @@
     const result = await signup(username, password, email, petname);
     if (result.success) {
       showSuccess(result.message || "Signup successful!");
-      // Optionally, redirect or clear fields here
     } else {
       showError(result.message || "Signup failed.");
     }

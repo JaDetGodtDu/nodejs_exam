@@ -29,6 +29,7 @@
         {#if isAdmin}
             <!-- <Link to="/admin">Admin</Link> -->
         {/if}
+        <Link to="/battlepage">Battle</Link>
     <button on:click={logout}>Logout</button>
     {/if}
     {#if !isLoggedIn}     

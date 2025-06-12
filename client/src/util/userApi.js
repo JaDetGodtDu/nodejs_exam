@@ -43,6 +43,10 @@ export async function login(username, password) {
 
     if (response.ok) {
         const data = await response.json();
+
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data.userId);
+
         session.set({
             isLoggedIn: true,
             userId: data.userId,
@@ -73,10 +77,13 @@ export async function logout() {
             username: null,
             email: null,
         });
+
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("roles");
         localStorage.removeItem("session");
+        localStorage.removeItem("userId");
+
         navigate("/");
         return {success: true, message: "Logout successful!" };
     } else {
@@ -98,6 +105,7 @@ export async function saveDeadPet(pet) {
             diedAt: new Date().toISOString(),
         }),
     })
+    
     if (!response.ok) {
         const error = await response.json();
         return { success: false, message: error.message || "Failed to save dead pet!" };

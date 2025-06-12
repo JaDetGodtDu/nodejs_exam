@@ -43,10 +43,6 @@ export async function fetchPet(ownerId) {
         },
     });
 
-    // if (!response.ok) {
-    //     return {message: "Failed to fetch pet!"};
-    // }
-
     const data = await response.json();
     return data;
 }

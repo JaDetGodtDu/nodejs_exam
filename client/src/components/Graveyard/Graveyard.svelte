@@ -10,10 +10,6 @@
         const result = await fetchPastPets();
         pastPets = result.pastPets || [];
     });
-
-    function formatDate(date) {
-        return new Date(date).toLocaleString();
-    }
 </script>
 
 <h2>Your Pet Graveyard</h2>

@@ -5,6 +5,7 @@ export default async function fetchSession() {
         method: "GET",
         credentials: "include",
     });
+    
     if (response.ok) {
         const data = await response.json();
         session.set({

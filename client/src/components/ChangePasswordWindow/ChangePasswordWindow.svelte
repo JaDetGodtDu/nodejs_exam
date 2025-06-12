@@ -40,7 +40,7 @@
     class="modal-backdrop"
     role="presentation"
     on:click={onClose}
-    on:keydown={(e) => { if (e.key === 'Escape') onClose(); }}
+    on:keydown={(event) => { if (event.key === 'Escape') onClose(); }}
 >
     <div
         class="modal"
@@ -48,7 +48,7 @@
         aria-modal="true"
         tabindex="0"
         on:click|stopPropagation
-        on:keydown={(e) => { if (e.key === 'Escape') onClose(); }}
+        on:keydown={(event) => { if (event.key === 'Escape') onClose(); }}
     >
         <h2>Change Password</h2>
         <form on:submit={handleSubmit}>
@@ -75,6 +75,7 @@
 {/if}
 
 <style>
+/* Why can't I figure out how to move this to its own CSS file?? */
 .modal-backdrop {
     position: fixed; 
     top: 0; 

@@ -56,7 +56,6 @@
                 if (pet) {
                     petAge = getPetAge(pet.createdAt, new Date().toISOString());
                 }
-                // petAge = getPetAge(pet.createdAt, new Date().toISOString());
             }, 1000);
         } else {
             console.error("Owner ID is not available");

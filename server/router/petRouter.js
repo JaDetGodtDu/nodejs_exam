@@ -5,17 +5,6 @@ import { ObjectId } from "mongodb";
 const petRouter = Router();
 const { pets, users } = dbConnection;
 
-// petRouter.get("/:id", async (req, res) => {
-//     const { id } = req.params;
-//     const petObjectId = new ObjectId(id);
-//     const pet = await pets.findOne({ _id: petObjectId });
-
-//     if (!pet) {
-//         return res.status(404).json({ message: "Pet not found!" });
-//     }
-//     return res.status(200).json({message: "Pet found!", pet });
-
-// });
 petRouter.get("/", async (req, res) => {
     const { ownerId } = req.query;
     
@@ -30,7 +19,6 @@ petRouter.get("/", async (req, res) => {
     }
 
     return res.status(200).json({ message: "Pet found!", pet });
-
 });
 
 petRouter.post("/create", async (req, res) => {
@@ -50,7 +38,9 @@ petRouter.post("/create", async (req, res) => {
         createdAt: new Date(),
         lastUpdated: new Date(),
     };
+
     const result = await pets.insertOne(newPet);
+
     res.status(201).json({ message: "Pet created successfully!", petId: result.insertedId });
 });
 
@@ -138,8 +128,8 @@ petRouter.delete("/delete/:id", async (req, res) => {
     if (result.deletedCount === 0) {
         return res.status(500).json({ message: "Failed to delete pet!" });
     }
-    return res.status(200).json({ message: "Pet deleted successfully!", pet });
 
+    return res.status(200).json({ message: "Pet deleted successfully!", pet });
 });
 
 export default petRouter;

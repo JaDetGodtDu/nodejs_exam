@@ -6,6 +6,7 @@
   import Profilepage from "./pages/Profilepage/Profilepage.svelte";
   import Loginpage from "./pages/Loginpage/Loginpage.svelte";
   import Signuppage from "./pages/Signuppage/Signuppage.svelte";
+  import Battlepage from "./pages/Battlepage/Battlepage.svelte";
 
   import { Router, Route } from "svelte-routing";
 
@@ -39,6 +40,14 @@
     <Route path="/profilepage">
       <Profilepage/>
     </Route>
+    <Route path="/battlepage">
+      <Battlepage/>
+    </Route>
+    <!-- {#if isAdmin}
+      <Route path="/admin">
+        <Adminpage/>
+      </Route>
+    {/if} -->
 {/if}    
     <Route path="/login">
       <Loginpage/>
