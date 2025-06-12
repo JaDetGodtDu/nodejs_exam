@@ -32,8 +32,8 @@ export default function socketHandler(io) {
             // Notify users when accepted
             for (let [id, user] of onlineUsers.entries()) {
                 if (user.userId === opponentUserId) {
-                    io.to(id).emit('battle-start', { with: username, userId });
-                    socket.emit('battle-start', { with: user.username, userId: user.userId });
+                    io.to(id).emit('battle-start', { opponent: username, userId });
+                    socket.emit('battle-start', { opponent: user.username, userId: user.userId });
                     break;
                 }
             }
