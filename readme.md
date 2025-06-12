@@ -24,9 +24,13 @@
 - Helmet()?
 
 - Make a battle system using sockets.broadcast !
+    - Fix online users list and battle request functionality
+        - Make usernames in chat clickable to request battle
     - Make an actual battle system and window/page/component
-    - Make battles end if either user leaves the battle.
-    - Fix the battlepage window / Chat with scrollbar
+    - Make battles end if either user leaves the battle
+    - Make it so a battle request can be cancelled
+    - Make it so accepting a battle cancels other requests
+    - Fix Chat with scrollbar (DONE)
 
 - Clean update and delete functionality in frontend !
 
