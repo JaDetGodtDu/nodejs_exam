@@ -17,7 +17,7 @@
 
 - Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
-- Set up admin system in frontend
+- Set up admin system in frontend (DONE)
 
 - Set up rate limiting.
 

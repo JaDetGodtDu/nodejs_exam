@@ -11,6 +11,7 @@ import sessionHandler from './util/sessionHandler.js';
 
 // UTILS
 import { petStatDecay } from './util/petStatDecay.js';
+import rateLimiter from './middleware/rateLimiter.js';
 
 // ROUTING
 import adminRouter from './router/adminRouter.js';
@@ -29,6 +30,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
 app.use(sessionHandler);
+app.use(rateLimiter);
 app.use('/admin', adminRouter)
 app.use('/users', userRouter)
 app.use('/pets', petRouter)
