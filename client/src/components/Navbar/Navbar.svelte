@@ -27,7 +27,7 @@
         <Link to="/profilepage">Profile</Link>
 
         {#if isAdmin}
-            <!-- <Link to="/admin">Admin</Link> -->
+            <Link to="/adminpage">Admin</Link>
         {/if}
         <Link to="/battlepage">Battle</Link>
     <button on:click={logout}>Logout</button>

@@ -1,12 +1,13 @@
 <script>
-  import Frontpage from "./pages/Frontpage/Frontpage.svelte";
   import Background from "./components/Background/Background.svelte";
   import Navbar from "./components/Navbar/Navbar.svelte";
+  import Frontpage from "./pages/Frontpage/Frontpage.svelte";
   import Petpage from "./pages/Petpage/Petpage.svelte";
   import Profilepage from "./pages/Profilepage/Profilepage.svelte";
   import Loginpage from "./pages/Loginpage/Loginpage.svelte";
   import Signuppage from "./pages/Signuppage/Signuppage.svelte";
   import Battlepage from "./pages/Battlepage/Battlepage.svelte";
+  import Adminpage from "./pages/Adminpage/Adminpage.svelte";
 
   import { Router, Route } from "svelte-routing";
 
@@ -43,11 +44,11 @@
     <Route path="/battlepage">
       <Battlepage/>
     </Route>
-    <!-- {#if isAdmin}
-      <Route path="/admin">
+    {#if isAdmin}
+      <Route path="/adminpage">
         <Adminpage/>
       </Route>
-    {/if} -->
+    {/if}
 {/if}    
     <Route path="/login">
       <Loginpage/>
