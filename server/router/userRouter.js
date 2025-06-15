@@ -3,11 +3,12 @@ import dbConnection from '../database/dbConnection.js';
 import {ObjectId} from 'mongodb';
 import {hashPassword, comparePassword} from '../util/hasher.js';
 import { sendEmail } from '../util/emailer.js';
+import { authLimiter } from '../middleware/rateLimiter.js'; // <-- Add this import
 
 const userRouter = Router();
 const { users, pets } = dbConnection;
 
-userRouter.post('/signup', async (req, res) => {
+userRouter.post('/signup', authLimiter, async (req, res) => {
     const {username, password, email} = req.body;
     const existingUser = await users.findOne({username});
     if (existingUser) {
@@ -42,7 +43,7 @@ userRouter.post('/signup', async (req, res) => {
 
 });
 
-userRouter.post('/login', async (req, res) => {
+userRouter.post('/login', authLimiter, async (req, res) => {
     const { username, password } = req.body;
     const user = await users.findOne({ username });
 
