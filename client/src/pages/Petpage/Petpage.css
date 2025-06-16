@@ -7,6 +7,10 @@
     padding-left: 0;
     padding-right: 0;
 }
+#pet-dead{
+    grid-template-columns: auto 1fr auto;
+}
+
 .pet-image {
     width: 50%;    
     height: 50%;    

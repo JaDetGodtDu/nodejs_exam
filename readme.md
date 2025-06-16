@@ -15,11 +15,11 @@
 
 - FIX THE ALERT WHEN DELETING ACCOUNT (DONE)
 
-- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
-
 - Set up admin system in frontend (DONE)
 
-- Set up rate limiting.
+- Set up rate limiting. (DONE)
+
+- Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
 - Helmet()?
 
@@ -33,9 +33,5 @@
     - Fix Chat with scrollbar (DONE)
 
 - Set a limit on pet actions pr hour
-
-- Clean update and delete functionality in frontend !
-
-- Maybe add a footer?
 
 set pet health to 0 string: db.pets.updateOne({name:'Dingus'}, {$set:{health:0}})

@@ -28,6 +28,22 @@ async function seedDB() {
             createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
             diedAt: new Date(),
         }],
+    },
+    {
+        username: "user3",
+        password: await hashPassword("user3pass"),
+        email: "user3@example.com",
+        isAdmin: false,
+        pastPets: [{
+            name:"Wumbus",
+            createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15),
+            diedAt: new Date(),
+            },
+            {
+            name:"Chungus",
+            createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10),
+            diedAt: new Date(),
+            }],
     }]
 
     const clearUsers = await db.collection("users").deleteMany({});
@@ -68,8 +84,18 @@ async function seedDB() {
         energy: 0,
         createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15), 
         lastUpdated: new Date(),
-    }
-]
+    },
+    {
+        ownerId: seededUsersResult.insertedIds[3],
+        name: "Dingolion",
+        type: 4,
+        hunger: 25,
+        happiness: 25,
+        health: 75,
+        energy: 25,
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10), 
+        lastUpdated: new Date(),
+    }]
 
     const clearPets = await db.collection("pets").deleteMany({});
     console.log(`Cleared pets collection!\n`, clearPets, `\nCleared ${clearPets.deletedCount} pets!`);
