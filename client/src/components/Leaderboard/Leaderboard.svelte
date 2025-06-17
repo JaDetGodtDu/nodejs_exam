@@ -17,8 +17,8 @@
         <div class="leaderboard-entity">
             <span><strong>{i + 1}.</strong></span>
             <span class="username">{entity.username}</span><br>
-            <span class="pet-name">{entity.pastPets.name}</span><br>
-            {#await Promise.resolve(getPetAge(entity.pastPets.createdAt, entity.pastPets.diedAt)) then age}
+            <span class="pet-name">{entity.petName}</span><br>
+            {#await Promise.resolve(getPetAge(entity.createdAt, entity.diedAt)) then age}
                 <span class="lifespan">{age.days}d {age.hours}h {age.minutes}m</span>
             {/await}
         </div>
