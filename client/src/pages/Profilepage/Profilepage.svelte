@@ -33,6 +33,7 @@
     async function showDeleteModal() {
         showConfirmDelete = true;
     }
+
     async function handleDelete(){
         showConfirmDelete = false;
         const result = await deleteUser();
@@ -50,6 +51,7 @@
             showError(result.message || "Failed to delete account.");
         }
     }
+    
     function cancelDelete() {
         showConfirmDelete = false;
     }

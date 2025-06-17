@@ -141,11 +141,9 @@
             <p><strong>Admin:</strong> {selectedUser.isAdmin ? "Yes" : "No"}</p>
             <p><strong>Past Pets:</strong></p>
 
-                {#each selectedUser.pastPets as pet}
-                    <p>{pet.name}</p>
-                {/each}
-
-            <!-- <p><strong>Past Pets:</strong> {selectedUser.pastPets}</p> -->
+            {#each selectedUser.pastPets as pet}
+                <p>{pet.name}</p>
+            {/each}
 
             {#if selectedUsersPet}
                 <div class="pet-info">

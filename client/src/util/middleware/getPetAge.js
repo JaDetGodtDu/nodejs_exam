@@ -3,10 +3,8 @@ export function getPetAge(createdAt, lastUpdated) {
     const lastUpdatedDate = new Date(lastUpdated);
 
     const diffInMS = lastUpdatedDate.getTime() - createdAtDate.getTime();
-
-
+    
     const diffInMinutes = Math.floor(diffInMS / (1000 * 60)); 
-
     const diffInHours = Math.floor(diffInMS / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMS / (1000 * 60 * 60 * 24));
 

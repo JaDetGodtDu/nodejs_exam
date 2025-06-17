@@ -1,63 +1,56 @@
 <script>
-  import Background from "./components/Background/Background.svelte";
-  import Navbar from "./components/Navbar/Navbar.svelte";
-  import Frontpage from "./pages/Frontpage/Frontpage.svelte";
-  import Petpage from "./pages/Petpage/Petpage.svelte";
-  import Profilepage from "./pages/Profilepage/Profilepage.svelte";
-  import Loginpage from "./pages/Loginpage/Loginpage.svelte";
-  import Signuppage from "./pages/Signuppage/Signuppage.svelte";
-  import Battlepage from "./pages/Battlepage/Battlepage.svelte";
-  import Adminpage from "./pages/Adminpage/Adminpage.svelte";
+    import Background from "./components/Background/Background.svelte";
+    import Navbar from "./components/Navbar/Navbar.svelte";
+    import Frontpage from "./pages/Frontpage/Frontpage.svelte";
+    import Petpage from "./pages/Petpage/Petpage.svelte";
+    import Profilepage from "./pages/Profilepage/Profilepage.svelte";
+    import Loginpage from "./pages/Loginpage/Loginpage.svelte";
+    import Signuppage from "./pages/Signuppage/Signuppage.svelte";
+    import Battlepage from "./pages/Battlepage/Battlepage.svelte";
+    import Adminpage from "./pages/Adminpage/Adminpage.svelte";
 
-  import { Router, Route } from "svelte-routing";
+    import { Router, Route } from "svelte-routing";
 
-  import { session } from './stores/sessionStore.js';
+    import { session } from './stores/sessionStore.js';
 	import fetchSession from "./util/fetchSession";
 
-  fetchSession();
+    fetchSession();
 
-  let isLoggedIn = false;
-  let isAdmin = false;
+    let isLoggedIn = false;
+    let isAdmin = false;
 
-  session.subscribe(value => {
-    isLoggedIn = value.isLoggedIn;
-    isAdmin = value.isAdmin;
-  });
+    session.subscribe(value => {
+        isLoggedIn = value.isLoggedIn;
+        isAdmin = value.isAdmin;
+    });
 </script>
 
-  <Background/>
-
-  <Router>
+<Background/>
+<Router>
     <Navbar/>
-
     <Route path="/">
-      <Frontpage/>
+        <Frontpage/>
     </Route>
-{#if isLoggedIn} 
-    <Route path="/petpage">
-      <Petpage/>
-    </Route>
-
-    <Route path="/profilepage">
-      <Profilepage/>
-    </Route>
-    <Route path="/battlepage">
-      <Battlepage/>
-    </Route>
-    {#if isAdmin}
-      <Route path="/adminpage">
-        <Adminpage/>
-      </Route>
-    {/if}
-{/if}    
+    {#if isLoggedIn} 
+        <Route path="/petpage">
+            <Petpage/>
+        </Route>
+        <Route path="/profilepage">
+            <Profilepage/>
+        </Route>
+        <Route path="/battlepage">
+            <Battlepage/>
+        </Route>
+        {#if isAdmin}
+            <Route path="/adminpage">
+                <Adminpage/>
+            </Route>
+        {/if}
+    {/if}    
     <Route path="/login">
-      <Loginpage/>
+        <Loginpage/>
     </Route>
-
     <Route path="/signup">
-      <Signuppage/>
+        <Signuppage/>
     </Route>
-  </Router>
- 
-
-
+</Router>

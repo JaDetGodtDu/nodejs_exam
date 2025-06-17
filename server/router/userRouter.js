@@ -11,6 +11,7 @@ const { users, pets } = dbConnection;
 userRouter.post('/signup', authLimiter, async (req, res) => {
     const {username, password, email} = req.body;
     const existingUser = await users.findOne({username});
+
     if (existingUser) {
         return res.status(400).json({message: 'Username taken!'});
     } else if (req.session.userId) {
@@ -53,10 +54,12 @@ userRouter.post('/login', authLimiter, async (req, res) => {
     if (req.session.userId) {
         return res.status(400).json({ message: 'User already logged in!' });
     }
+
     req.session.userId = user._id;
     req.session.isAdmin = user.isAdmin;
     req.session.username = user.username;
     req.session.email = user.email;
+
     return res.status(200).json({ 
         message: 'Login successful!', 
         userId: user._id, 
@@ -87,6 +90,7 @@ userRouter.post('/pastPets', async (req, res) => {
     if (!user) {
         return res.status(404).json({ message: 'User not found!' });
     }
+
     await users.updateOne(
         { _id: userObjectId },
         { $push: { pastPets: { name, createdAt, diedAt } } }
@@ -97,9 +101,11 @@ userRouter.post('/pastPets', async (req, res) => {
 userRouter.get('/pastPets', async (req, res) => {
     const userObjectId = new ObjectId(req.session.userId);
     const user = await users.findOne({ _id: userObjectId }, { projection: { pastPets: 1 } });
+
     if (!user) {
         return res.status(404).json({ message: 'User not found!' });
     }
+    
     res.json({ pastPets: user.pastPets || [] });
 });
 
@@ -150,7 +156,6 @@ userRouter.put('/updatePassword', async (req, res) => {
 userRouter.delete('/delete', async (req, res) => {
     const userObjectId = new ObjectId(req.session.userId);
     const user = await users.findOne({ _id: userObjectId});
-    const usersPet = await pets.findOne({ ownerId: userObjectId });
 
     if (!req.session.userId) {
         return res.status(401).json({ message: 'No user logged in!' });
@@ -160,9 +165,10 @@ userRouter.delete('/delete', async (req, res) => {
  
     await users.deleteOne({ _id: userObjectId });
     await pets.deleteOne({ ownerId: userObjectId });
-    req.session.destroy();
-    return res.status(200).json({ message: 'You deleted your user succesfully!', username: user.username });
     
+    req.session.destroy();
+
+    return res.status(200).json({ message: 'You deleted your user succesfully!', username: user.username });  
 });
 
 export default userRouter;

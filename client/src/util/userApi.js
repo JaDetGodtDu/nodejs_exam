@@ -131,6 +131,7 @@ export async function updateUser( username, email) {
     });
 
     const data = await response.json();
+    
     if (response.ok) {
         return { success: true, message: data.message || "Update successful!" };
     } else {

@@ -2,7 +2,7 @@ import rateLimit from 'express-rate-limit';
 
 export const rateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 900000ms
-    max:900, // 1 pr second
+    max:900, // 1 pr second over a 15 minute duration
     message: {
         status: 429,
         error: 'Too many requests, please try again later.'
@@ -13,7 +13,7 @@ export const rateLimiter = rateLimit({
 
 export const adminLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 900000ms
-    max: 100, // ~7 pr minute
+    max: 100, // ~7 pr minute over a 15 minute duration
     message: {
         status: 429,
         error: 'Too many admin requests, please try again later.'

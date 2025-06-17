@@ -80,8 +80,8 @@
     <h3>Online Users</h3>
     <ul>
         {#each onlineUsers as user}
-                {user.username}
-                <button on:click={() => requestBattle(user.userId)}>Battle!</button>
+            {user.username}
+            <button on:click={() => requestBattle(user.userId)}>Battle!</button>
         {/each}
     </ul>
 
@@ -96,10 +96,8 @@
         <h3>Battle Requests</h3>
         <ul>
             {#each battleRequests as req}
-                <li>
-                    {req.from} wants to battle!
-                    <button on:click={() => acceptBattle(req.fromUserId)}>Accept</button>
-                </li>
+                {req.from} wants to battle!
+                <button on:click={() => acceptBattle(req.fromUserId)}>Accept</button>
             {/each}
         </ul>
     {/if}

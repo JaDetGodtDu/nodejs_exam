@@ -23,5 +23,4 @@
             Lifespan: {age.days}d {age.hours}h {age.minutes}m<br>
         </span>
     {/each}
-
 {/if}

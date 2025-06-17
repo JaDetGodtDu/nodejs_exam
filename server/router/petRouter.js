@@ -6,10 +6,8 @@ const petRouter = Router();
 const { pets, users } = dbConnection;
 
 petRouter.get("/", async (req, res) => {
-    const { ownerId } = req.query;
-    
+    const { ownerId } = req.query;  
     const ownerObjectId = new ObjectId(ownerId);
-
     const pet = await pets.findOne({ ownerId: ownerObjectId });
 
     if (!pet) {
@@ -23,7 +21,6 @@ petRouter.get("/", async (req, res) => {
 
 petRouter.post("/create", async (req, res) => {
     const { ownerId, name } = req.body;
-
     const ownerObjectId = new ObjectId(ownerId);
     const user = await users.findOne({ _id: ownerObjectId });
     
@@ -46,7 +43,6 @@ petRouter.post("/create", async (req, res) => {
 
 petRouter.post("/action", async (req, res) => {
     const { petId, action } = req.body;
-
     const petObjectId = new ObjectId(petId);
     const pet = await pets.findOne({ _id: petObjectId });
 
@@ -99,9 +95,11 @@ petRouter.post("/action", async (req, res) => {
         { _id: petObjectId },
         { $set: updatedPet }
     );
+
     if (result.modifiedCount === 0) {
         return res.status(404).json({ message: "Failed to update pet", result });
     }
+    
     const response = {
         name: updatedPet.name,
         type: updatedPet.type,
