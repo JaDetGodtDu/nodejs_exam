@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 
 // SOCKET
 import http from 'http';
@@ -21,6 +22,8 @@ import petRouter from './router/petRouter.js';
 import sessionRouter from './router/sessionRouter.js';
 
 const app = express();
+
+app.use(helmet()); 
 
 app.use(express.json());
 
