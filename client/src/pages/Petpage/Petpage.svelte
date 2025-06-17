@@ -14,6 +14,7 @@
     import { showSuccess, showError, showInfo, showWarning } from '../../util/toaster';
 
     import Leaderboard from '../../components/Leaderboard/Leaderboard.svelte';
+    import Graveyard from '../../components/Graveyard/Graveyard.svelte';
 
     let pet = null;
     let ownerId = null;
@@ -172,4 +173,5 @@
         {/if}
         <Leaderboard />
     </div>
+    <Graveyard />
 </div>

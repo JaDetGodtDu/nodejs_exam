@@ -12,17 +12,16 @@
     });
 </script>
 
-<h2>Your Pet Graveyard</h2>
+<h2>Graveyard</h2>
 {#if pastPets.length === 0}
     <p>No past pets yet!</p>
 {:else}
-
-        {#each pastPets as pet}
-            {@const age = getPetAge(pet.createdAt, pet.diedAt)}
-            <li>
-                <strong>{pet.name}</strong><br>
-                Lifespan: {age.days}d {age.hours}h {age.minutes}m<br>
-            </li>
-        {/each}
+    {#each pastPets as pet}
+        {@const age = getPetAge(pet.createdAt, pet.diedAt)}
+        <span>
+            <strong>{pet.name}</strong><br>
+            Lifespan: {age.days}d {age.hours}h {age.minutes}m<br>
+        </span>
+    {/each}
 
 {/if}

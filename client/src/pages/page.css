@@ -17,3 +17,8 @@
     overflow: hidden;
     padding: 20px;
 }
+@media (max-width: 1600px) {
+    .page {
+        width: 80vw;
+    }
+}
