@@ -10,6 +10,11 @@
     flex-direction: column;
     gap: 8px;
 }
+@media (max-width: 1600px) {
+    #chat-window {
+        max-width: 40vw;
+    }
+}
 #chat-window h3 {
     margin: 0;
     font-size: 1em;
