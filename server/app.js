@@ -19,7 +19,8 @@ import { rateLimiter, adminLimiter }from './middleware/rateLimiter.js';
 import adminRouter from './router/adminRouter.js';
 import userRouter from './router/userRouter.js';
 import petRouter from './router/petRouter.js';
-import sessionRouter from './router/sessionRouter.js';
+import sessionRouter from './router/sessionRouter.js'
+import leaderboardRouter from './router/leaderboardRouter.js';
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(sessionHandler);
 app.use('/admin', adminLimiter, adminRouter)
 app.use('/users', rateLimiter, userRouter)
 app.use('/pets', rateLimiter, petRouter)
+app.use('/leaderboard', rateLimiter, leaderboardRouter);
 app.use(sessionRouter)
 
 import socketHandler from './util/socketHandler.js';

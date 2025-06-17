@@ -21,7 +21,7 @@
 
 - Expand User database object, to accomodate a leaderboard for all users and to have a list of past pets and how long they lived. (half done)
 
-- Helmet()?
+- Helmet()? (DONE)
 
 - Make a battle system using sockets.broadcast !
     - Fix online users list and battle request functionality
