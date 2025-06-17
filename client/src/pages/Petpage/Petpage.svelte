@@ -13,6 +13,8 @@
     import { getPetImg } from '../../util/middleware/getPetImg';
     import { showSuccess, showError, showInfo, showWarning } from '../../util/toaster';
 
+    import Leaderboard from '../../components/Leaderboard/Leaderboard.svelte';
+
     let pet = null;
     let ownerId = null;
     let petAge = null;
@@ -168,5 +170,6 @@
         {:else}
             <p>Loading pet details...</p>
         {/if}
+        <Leaderboard />
     </div>
 </div>
